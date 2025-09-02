@@ -1,0 +1,144 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fa;
+    color: #333;
+  }
+  
+  header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  main {
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+  }
+  
+  nav ul li {
+    margin: 10px 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: bold;
+    background-color: #e6f0ff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: background-color 0.2s;
+  }
+  
+  nav ul li a:hover {
+    background-color: #cce0ff;
+  }
+  
+  /* Reporte de incidencias */
+  .card {
+    background-color: white;
+    border-left: 6px solid #3399ff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .card h3 {
+    margin-top: 0;
+    color: #004080;
+  }
+  
+  .card p {
+    margin: 10px 0 0 0;
+  }
+  
+  /* Formulario */
+  form input[type="text"],
+  form input[type="password"],
+  form textarea,
+  form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  form button,
+  form input[type="submit"] {
+    background-color: #004080;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  form button:hover,
+  form input[type="submit"]:hover {
+    background-color: #0066cc;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #e6f0ff;
+  }
+  
+  a {
+    color: #004080;
+    font-weight: bold;
+  }
+  /* Barra de navegación en encabezado */
+.nav-header {
+    display: flex;
+    justify-content: center;
+    background-color: #00264d;
+    margin-top: 20px;
+  }
+  
+  .nav-header li {
+    margin: 0 15px;
+  }
+  
+  .nav-header a {
+    color: white;
+    background: none;
+    font-weight: normal;
+    padding: 10px;
+    border-radius: 0;
+  }
+  
+  .nav-header a:hover {
+    background-color: #004080;
+    border-radius: 5px;
+  }

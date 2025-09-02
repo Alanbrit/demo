@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <main>
+    <h2>Panel de Administración</h2>
+
+    <form id="formulario">
+      <label for="titulo">Título:</label>
+      <input type="text" id="titulo" name="titulo">
+
+      <label for="contenido">Contenido:</label>
+      <textarea id="contenido" name="contenido"></textarea>
+
+      <label for="tipo">Tipo de Incidencia:</label>
+      <select id="tipo" name="tipo">
+        <option>Pedagoga</option>
+        <option>Maestra</option>
+        <option>Auxiliar</option>
+      </select>
+
+      <input type="submit" value="Subir Reporte">
+    </form>
+
+    <h3>Listado de Incidencias</h3>
+    <table id="tabla">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Contenido</th>
+          <th>Tipo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ejemplo 1</td>
+          <td>Contenido de prueba</td>
+          <td>Maestra</td>
+          <td>
+            <button onclick="editarFila(this)">Editar</button>
+            <button onclick="eliminarFila(this)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a href="../index.html">← Volver al inicio</a>
+  </main>
+
+  <script>
+    let filaEditando = null;
+
+    document.getElementById("formulario").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const titulo = document.getElementById("titulo").value;
+      const contenido = document.getElementById("contenido").value;
+      const tipo = document.getElementById("tipo").value;
+
+      if (filaEditando) {
+        filaEditando.cells[0].textContent = titulo;
+        filaEditando.cells[1].textContent = contenido;
+        filaEditando.cells[2].textContent = tipo;
+        filaEditando = null;
+      } else {
+        const nuevaFila = document.createElement("tr");
+        nuevaFila.innerHTML = `
+          <td>${titulo}</td>
+          <td>${contenido}</td>
+          <td>${tipo}</td>
+          <td>
+            <button onclick="editarFila(this)">Editar</button>
+            <button onclick="eliminarFila(this)">Eliminar</button>
+          </td>
+        `;
+        document.querySelector("#tabla tbody").appendChild(nuevaFila);
+      }
+
+      this.reset();
+    });
+
+    function eliminarFila(boton) {
+      const fila = boton.closest("tr");
+      fila.remove();
+    }
+
+    function editarFila(boton) {
+      filaEditando = boton.closest("tr");
+      document.getElementById("titulo").value = filaEditando.cells[0].textContent;
+      document.getElementById("contenido").value = filaEditando.cells[1].textContent;
+      document.getElementById("tipo").value = filaEditando.cells[2].textContent;
+    }
+  </script>
+</body>
+</html>
+
