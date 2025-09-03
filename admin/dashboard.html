@@ -3,6 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard Admin</title>
+  <style>
+    button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+  }
+
+  button[type="submit"] {
+    background-color: #4285f4;
+    color: white;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #3367d6;
+  }
+
+  button.eliminar {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  button.eliminar:hover {
+    background-color: #c0392b;
+  }
+  </style>
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -48,8 +78,8 @@
           <td>Maestra</td>
           <td>
             <button onclick="editarFila(this)" type="submit">Editar</button>
-            <button onclick="eliminarFila(this)">Eliminar</button>
-          </td>
+            <button onclick="eliminarFila(this)" class="eliminar">Eliminar</button>
+          </td>          
         </tr>
       </tbody>
     </table>
