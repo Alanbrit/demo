@@ -4,27 +4,146 @@
   <meta charset="UTF-8">
   <title>Incidencias Pedagoga</title>
   <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 10px;
+      background-color: #f9f9f9;
+    }
+
+    #search-bar {
+      margin-bottom: 20px;
+      padding: 8px;
+      width: 300px;
+      font-size: 16px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .pagination button {
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <main>
-    <h2>Incidencias - Pedagoga</h2>
+    <h2>Incidencias</h2>
 
-    <div class="card">
-      <h3>Comunicación Deficiente</h3>
-      <p>La pedagoga no ha entregado los reportes mensuales a tiempo, afectando la evaluación del grupo.</p>
+    <input type="text" id="search-bar" placeholder="Buscar por nombre...">
+
+    <div id="cards-container">
+      <div class="card">
+        <h3>Sofia Mireles</h3>
+        <p>Lorem Ipsum is simply dummy text...</p>
+        <p>Area:</p><a>Medico</a>
+      </div>
+
+      <div class="card">
+        <h3>Maria Ramirez</h3>
+        <p>Lorem Ipsum is simply dummy text...</p>
+        <p>Area:</p><a>Pedagoga</a>
+      </div>
+
+      <div class="card">
+        <h3>Juan Lopez</h3>
+        <p>Lorem Ipsum is simply dummy text...</p>
+        <p>Area:</p><a>Maestra</a>
+      </div>
+
+      <div class="card">
+        <h3>Laura García</h3>
+        <p>Lorem Ipsum is simply dummy text...</p>
+        <p>Area:</p><a>Pedagoga</a>
+      </div>
+
+      <div class="card">
+        <h3>Carlos Martinez</h3>
+        <p>Lorem Ipsum is simply dummy text...</p>
+        <p>Area:</p><a>Medico</a>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Falta en Reunión</h3>
-      <p>No asistió a la reunión con padres programada el día lunes 21.</p>
+    <div class="pagination">
+      <button id="prev-btn">Anterior</button>
+      <span id="page-info"></span>
+      <button id="next-btn">Siguiente</button>
     </div>
 
-    <div class="card">
-      <h3>Inconsistencias en Reportes</h3>
-      <p>Se detectaron errores en la documentación de seguimiento de alumnos.</p>
-    </div>
-
+    <br><br>
     <a href="../index.html">← Volver al inicio</a>
   </main>
+
+  <script>
+    const cards = Array.from(document.querySelectorAll(".card"));
+    const searchInput = document.getElementById("search-bar");
+    const cardsContainer = document.getElementById("cards-container");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const pageInfo = document.getElementById("page-info");
+
+    let filteredCards = [...cards];
+    let currentPage = 1;
+    const cardsPerPage = 3;
+
+    function updatePagination() {
+      const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+      if (currentPage > totalPages) currentPage = totalPages || 1;
+
+      const start = (currentPage - 1) * cardsPerPage;
+      const end = start + cardsPerPage;
+
+      cards.forEach(card => card.classList.add("hidden"));
+      filteredCards.forEach((card, index) => {
+        if (index >= start && index < end) {
+          card.classList.remove("hidden");
+        }
+      });
+
+      pageInfo.textContent = `Página ${currentPage} de ${totalPages || 1}`;
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    function filterCards() {
+      const term = searchInput.value.toLowerCase();
+      filteredCards = cards.filter(card => {
+        const name = card.querySelector("h3").textContent.toLowerCase();
+        return name.includes(term);
+      });
+      currentPage = 1;
+      updatePagination();
+    }
+
+    searchInput.addEventListener("input", filterCards);
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        updatePagination();
+      }
+    });
+    nextBtn.addEventListener("click", () => {
+      const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        updatePagination();
+      }
+    });
+
+    // Inicialización
+    updatePagination();
+  </script>
 </body>
 </html>

@@ -16,11 +16,14 @@
       <label for="contenido">Contenido:</label>
       <textarea id="contenido" name="contenido"></textarea>
 
-      <label for="tipo">Tipo de Incidencia:</label>
-      <select id="tipo" name="tipo">
+      <label for="alumno">Nombre del alumno:</label>
+      <input type="text" id="alumno" name="alumno">
+
+      <label for="area">Area</label>
+      <select id="area" name="area">
         <option>Pedagoga</option>
         <option>Maestra</option>
-        <option>Auxiliar</option>
+        <option>Medico</option>
       </select>
 
       <input type="submit" value="Subir Reporte">
@@ -32,7 +35,8 @@
         <tr>
           <th>Título</th>
           <th>Contenido</th>
-          <th>Tipo</th>
+          <th>Alumno</th>
+          <th>Area</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -40,15 +44,16 @@
         <tr>
           <td>Ejemplo 1</td>
           <td>Contenido de prueba</td>
+          <td>Maria Gallegos</td>
           <td>Maestra</td>
           <td>
-            <button onclick="editarFila(this)">Editar</button>
+            <button onclick="editarFila(this)" type="submit">Editar</button>
             <button onclick="eliminarFila(this)">Eliminar</button>
           </td>
         </tr>
       </tbody>
     </table>
-
+    <br><br>
     <a href="../index.html">← Volver al inicio</a>
   </main>
 
@@ -56,33 +61,36 @@
     let filaEditando = null;
 
     document.getElementById("formulario").addEventListener("submit", function(e) {
-      e.preventDefault();
+  e.preventDefault();
 
-      const titulo = document.getElementById("titulo").value;
-      const contenido = document.getElementById("contenido").value;
-      const tipo = document.getElementById("tipo").value;
+  const titulo = document.getElementById("titulo").value;
+  const contenido = document.getElementById("contenido").value;
+  const alumno = document.getElementById("alumno").value;
+  const area = document.getElementById("area").value;
 
-      if (filaEditando) {
-        filaEditando.cells[0].textContent = titulo;
-        filaEditando.cells[1].textContent = contenido;
-        filaEditando.cells[2].textContent = tipo;
-        filaEditando = null;
-      } else {
-        const nuevaFila = document.createElement("tr");
-        nuevaFila.innerHTML = `
-          <td>${titulo}</td>
-          <td>${contenido}</td>
-          <td>${tipo}</td>
-          <td>
-            <button onclick="editarFila(this)">Editar</button>
-            <button onclick="eliminarFila(this)">Eliminar</button>
-          </td>
-        `;
-        document.querySelector("#tabla tbody").appendChild(nuevaFila);
-      }
+  if (filaEditando) {
+    filaEditando.cells[0].textContent = titulo;
+    filaEditando.cells[1].textContent = contenido;
+    filaEditando.cells[2].textContent = alumno;
+    filaEditando.cells[3].textContent = area;
+    filaEditando = null;
+  } else {
+    const nuevaFila = document.createElement("tr");
+    nuevaFila.innerHTML = `
+      <td>${titulo}</td>
+      <td>${contenido}</td>
+      <td>${area}</td>
+      <td>${alumno}</td>
+      <td>
+        <button onclick="editarFila(this)">Editar</button>
+        <button onclick="eliminarFila(this)">Eliminar</button>
+      </td>
+    `;
+    document.querySelector("#tabla tbody").appendChild(nuevaFila);
+  }
 
-      this.reset();
-    });
+  this.reset();
+});
 
     function eliminarFila(boton) {
       const fila = boton.closest("tr");
@@ -93,7 +101,8 @@
       filaEditando = boton.closest("tr");
       document.getElementById("titulo").value = filaEditando.cells[0].textContent;
       document.getElementById("contenido").value = filaEditando.cells[1].textContent;
-      document.getElementById("tipo").value = filaEditando.cells[2].textContent;
+      document.getElementById("alumno").value = filaEditando.cells[2].textContent;
+      document.getElementById("area").value = filaEditando.cells[3].textContent;
     }
   </script>
 </body>
